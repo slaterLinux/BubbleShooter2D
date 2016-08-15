@@ -5,43 +5,39 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class GamePanel extends JPanel implements Runnable {
+class GamePanel extends JPanel implements Runnable {
 
     //Field
-    public final static int WIDTH = 600;
-    public final static int HEIGHT = 600;
+    final static int WIDTH = 600;
+    final static int HEIGHT = 600;
 
-    public static int mouseX;
-    public static int mouseY;
+    static int mouseX;
+    static int mouseY;
 
-    private Thread thread = new Thread(this);
+    private final Thread thread = new Thread(this);
 
     private BufferedImage image;
     private Graphics2D g;
 
-    private int fps;
-    private double millisToFPS;
     private long timerFPS;
-    private int sleepTime;
 
-    public enum STATES{
+    enum STATES {
         MENU,
         PLAY
     }
 
-    public static STATES state = STATES.MENU;
+    static STATES state = STATES.MENU;
 
-    public static GameBack background;
-    public static Player player;
-    public static ArrayList<Bullet> bullets;
-    public static ArrayList<Enemy> enemies;
-    public static Wave wave;
-    public static Menu menu;
-    public static boolean leftMouse;
+    private static GameBack background;
+    static Player player;
+    static ArrayList<Bullet> bullets;
+    static ArrayList<Enemy> enemies;
+    private static Wave wave;
+    static boolean leftMouse;
 
 
     //Constructor
-    public GamePanel() {
+    GamePanel() {
         super();
         //задать размеры
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -53,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void start() {
+    void start() {
         thread.start();
     }
 
@@ -61,9 +57,9 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        fps = 30;
-        millisToFPS = 1000 / fps;
-        sleepTime = 0;
+        int fps = 30;
+        double millisToFPS = 1000 / fps;
+        int sleepTime;
 
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
@@ -74,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         bullets = new ArrayList<Bullet>();
         enemies = new ArrayList<Enemy>();
         wave = new Wave();
-        menu = new Menu();
+        Menu menu = new Menu();
         leftMouse = false;
 
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -111,16 +107,15 @@ public class GamePanel extends JPanel implements Runnable {
                 sleepTime = (int) (millisToFPS - timerFPS);
             } else sleepTime = 1;
             try {
-                thread.sleep(sleepTime);
+                Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             timerFPS = 0;
-            sleepTime = 1;
         }
     }
 
-    public void gameUpdate() {
+    private void gameUpdate() {
         //Background update
         background.update();
 
@@ -137,9 +132,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        //enemis update
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).update();
+        //enemies update
+        for (Enemy enemy1 : enemies) {
+            enemy1.update();
         }
 
         //bullets-enemies collide
@@ -176,7 +171,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             double px = player.getX();
             double py = player.getY();
-            double pr = player.getR();
             double dx = ex - px;
             double dy = ey - py;
             double dist = Math.sqrt(dx * dx + dy * dy);
@@ -197,8 +191,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
 
-
-    public void gameRender() {
+    private void gameRender() {
         //Background draw
         background.draw(g);
 

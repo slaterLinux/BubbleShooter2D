@@ -2,21 +2,19 @@ package bubbleshooter;
 
 import java.awt.*;
 
-/**
- * Created by slater on 12.08.16.
- */
-public class Menu {
+
+class Menu {
 
     //Fields
-    private int buttonWidth;
-    private int buttonHeight;
-    private Color color1;
-    private String s;
+    private final int buttonWidth;
+    private final int buttonHeight;
+    private final Color color1;
+    private final String s;
     private int transp = 0;
 
     //Constructor
 
-    public Menu() {
+    Menu() {
         buttonWidth = 120;
         buttonHeight = 60;
 
@@ -28,7 +26,7 @@ public class Menu {
 
     //Functions
 
-    public void draw(Graphics2D g) {
+    void draw(Graphics2D g) {
         g.setColor(color1);
         g.setStroke(new BasicStroke(3));
         g.drawRect(GamePanel.WIDTH/ 2 - buttonWidth/2,
@@ -41,10 +39,10 @@ public class Menu {
         g.setFont(new Font("Consolas", Font.BOLD, 40));
         long length = (int) g.getFontMetrics().getStringBounds(s, g).getHeight();
         g.drawString(s, (int) (GamePanel.WIDTH / 2 - length * 1.2),
-                (int) (GamePanel.HEIGHT / 2 + buttonHeight / 4));
+                GamePanel.HEIGHT / 2 + buttonHeight / 4);
     }
 
-    public void update(){
+    void update() {
         if (GamePanel.mouseX > GamePanel.WIDTH / 2 - buttonWidth / 2 &&
                 GamePanel.mouseX < GamePanel.WIDTH / 2 + buttonWidth / 2 &&
                 GamePanel.mouseY > GamePanel.HEIGHT / 2 - buttonHeight / 2 &&

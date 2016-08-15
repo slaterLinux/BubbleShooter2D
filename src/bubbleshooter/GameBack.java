@@ -2,26 +2,24 @@ package bubbleshooter;
 
 import java.awt.*;
 
-/**
- * Created by slater on 10.08.16.
- */
-public class GameBack {
+
+class GameBack {
 
     //Field
-    private Color color;
+    private final Color color;
 
 
     //Constructor
-    public GameBack() {
+    GameBack() {
         color = Color.BLUE;
     }
 
     //FUnctions
-    public void update(){
+    void update() {
 
     }
 
-    public void draw(Graphics2D g){
+    void draw(Graphics2D g) {
         g.setColor(color);
         g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
     }

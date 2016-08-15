@@ -2,10 +2,7 @@ package bubbleshooter;
 
 import java.awt.event.*;
 
-/**
- * Created by slater on 10.08.16.
- */
-public class Listeners implements KeyListener, MouseListener, MouseMotionListener {
+class Listeners implements KeyListener, MouseListener, MouseMotionListener {
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -61,7 +58,7 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            GamePanel.player.isFiring = true;
+            Player.isFiring = true;
             GamePanel.leftMouse = true;
         }
     }
@@ -69,7 +66,7 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
     @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            GamePanel.player.isFiring = false;
+            Player.isFiring = false;
             GamePanel.leftMouse = false;
         }
     }

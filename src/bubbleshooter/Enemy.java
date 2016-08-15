@@ -2,33 +2,25 @@ package bubbleshooter;
 
 import java.awt.*;
 
-/**
- * Created by slater on 10.08.16.
- */
-public class Enemy {
+class Enemy {
 
     //Fields
     private double x;
     private double y;
     private int r;
-    private double speed;
     private double dx;
     private double dy;
     private double health;
 
 
-    private int type;
-    private int rank;
-
     private Color color;
 
     //Constructor
-    public Enemy(int type, int rank) {
-        this.type = type;
-        this.rank = rank;
+    Enemy(int type, int rank) {
         switch (type) {
             case (1):
                 color = Color.GREEN;
+                double speed;
                 switch (rank) {
                     case (1):
                         x = Math.random() * GamePanel.WIDTH;
@@ -81,27 +73,27 @@ public class Enemy {
 
     //Functions
 
-    public double getX() {
+    double getX() {
         return x;
     }
 
-    public double getY() {
+    double getY() {
         return y;
     }
 
-    public int getR() {
+    int getR() {
         return r;
     }
 
-    public void hit(){
+    void hit() {
         health--;
     }
 
-    public boolean remove(){
+    boolean remove() {
         return health <= 0;
     }
 
-    public void update(){
+    void update() {
         x += dx;
         y += dy;
         if (x < 0 && dx < 0) dx = -dx;
@@ -110,7 +102,7 @@ public class Enemy {
         if (y > GamePanel.WIDTH && dy > 0) dy = -dy;
     }
 
-    public void draw(Graphics2D g) {
+    void draw(Graphics2D g) {
         g.setColor(color);
         g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
         g.setStroke(new BasicStroke(r / 3));

@@ -2,33 +2,31 @@ package bubbleshooter;
 
 import java.awt.*;
 
-/**
- * Created by slater on 10.08.16.
- */
-public class Player {
+
+class Player {
 
     //Fields
     private double x;
     private double y;
-    private int r;
+    private final int r;
 
     private double dx;
     private double dy;
 
-    private int speed;
+    private final int speed;
     private int health;
 
-    private Color color1;
+    private final Color color1;
     private Color color2;
 
-    public static boolean up;
-    public static boolean down;
-    public static boolean left;
-    public static boolean right;
-    public static boolean isFiring;
+    static boolean up;
+    static boolean down;
+    static boolean left;
+    static boolean right;
+    static boolean isFiring;
 
 
-    public Player() {
+    Player() {
         x = GamePanel.HEIGHT / 2;
         y = GamePanel.WIDTH / 2;
 
@@ -47,24 +45,24 @@ public class Player {
         health = 3;
     }
 
-    public double getX() {
+    double getX() {
         return x;
     }
 
-    public double getY() {
+    double getY() {
         return y;
     }
 
-    public int getR() {
+    int getR() {
         return r;
     }
 
-    public int getHealth() {
+    int getHealth() {
         return health;
     }
 
     //Functions
-    public void update() {
+    void update() {
         if (up && y > r) {
             dy = -speed;
         }
@@ -92,7 +90,7 @@ public class Player {
         }
     }
 
-    public void draw(Graphics2D g) {
+    void draw(Graphics2D g) {
         g.setColor(color1);
         g.fillOval((int) (x - r), (int) (y - r), 2 * r, 2 * r);
         g.setStroke(new BasicStroke(1));
@@ -101,9 +99,7 @@ public class Player {
         g.setStroke(new BasicStroke(1));
     }
 
-    public void hit(){
+    void hit() {
         health--;
     }
-
-
 }

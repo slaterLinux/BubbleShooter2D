@@ -2,26 +2,24 @@ package bubbleshooter;
 
 import java.awt.*;
 
-/**
- * Created by slater on 11.08.16.
- */
-public class Wave {
+
+class Wave {
 
     //Fields
     private int waveNumber;
 
     private long waveTimer;
-    private long waveDelay;
+    private final long waveDelay;
     private long waveTimerDiff;
 
-    private int waveMultiplier;
+    private final int waveMultiplier;
 
-    private String waveText;
+    private final String waveText;
 
     //Constructor
 
 
-    public Wave() {
+    Wave() {
         waveNumber = 1;
         waveMultiplier = 5;
         waveTimer = 0;
@@ -31,7 +29,7 @@ public class Wave {
     }
 
     //Functions
-    public void update(){
+    void update() {
         if (GamePanel.enemies.size() == 0 && waveTimer == 0) {
             waveTimer = System.nanoTime();
         }
@@ -46,13 +44,11 @@ public class Wave {
         }
     }
 
-    public boolean showWave(){
-        if (waveTimer != 0) {
-            return true;
-        } else return false;
+    boolean showWave() {
+        return waveTimer != 0;
     }
 
-    public void createEnemies(){
+    private void createEnemies() {
         int enemyCount = waveNumber * waveMultiplier;
         if (waveNumber <= 2) {
             while (enemyCount > 0) {
@@ -126,8 +122,7 @@ public class Wave {
     }
 
 
-
-    public void draw(Graphics2D g){
+    void draw(Graphics2D g) {
         double divider = waveDelay / 180;
         double alpha = waveTimerDiff / divider;
         alpha = 255 * Math.sin(Math.toRadians(alpha));
